@@ -1,0 +1,1040 @@
+{
+  "publisher": "Australian Taxation Office, Commonwealth of Australia",
+  "data_kind": "real public corporate disclosures, not synthetic",
+  "retrieved_at_utc": "2026-10-01T08:37:08.196778+00:00",
+  "dataset_url": "https://data.gov.au/data/dataset/corporate-transparency",
+  "metadata_url": "https://data.gov.au/data/api/3/action/package_show?id=corporate-transparency",
+  "licence_url": "http://creativecommons.org/licenses/by/3.0/au/",
+  "source_licence": "Creative Commons Attribution 3.0 Australia",
+  "release_count": 12,
+  "releases": [
+    {
+      "release_year": "2013-14",
+      "resource": {
+        "id": "237d7ede-3a63-4b9b-9434-2f79b9d70ce8",
+        "name": "2013-14 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/237d7ede-3a63-4b9b-9434-2f79b9d70ce8/download/2013-14corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2015-12-01T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2013-14corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "77cd1739b1509d209ac4cb667aec697bfad938462bee60eb58009a6e03f9c81a"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 3718,
+          "income_years": [
+            "2013-14"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 20,
+            "total_income": 0,
+            "taxable_income": 1094,
+            "tax_payable": 1352,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 3548714916354,
+            "taxable_income": 356183713758,
+            "tax_payable": 83830809316
+          }
+        },
+        "prrt": {
+          "records": 12,
+          "income_years": [
+            "2013-14"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 1765976736
+          }
+        },
+        "mrrt": {
+          "records": 7,
+          "income_years": [
+            "2013-14"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 287856489
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2014-15",
+      "resource": {
+        "id": "1e8c8ae0-81d1-4780-a669-9e4a2a6ba1a4",
+        "name": "2014-15 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/1e8c8ae0-81d1-4780-a669-9e4a2a6ba1a4/download/2014-15-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2016-12-14T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2014-15-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "932f502aa4d2ded17110e2c4821446748c793b26e76bec36938530eec2b0aeaa"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 1945,
+          "income_years": [
+            "2013-14",
+            "2014-15"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 14,
+            "total_income": 0,
+            "taxable_income": 561,
+            "tax_payable": 704,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 1797393885353,
+            "taxable_income": 169465888385,
+            "tax_payable": 42013251344.58
+          }
+        },
+        "prrt": {
+          "records": 12,
+          "income_years": [
+            "2014-15"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 1201506897
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2015-16",
+      "resource": {
+        "id": "b84c2b8d-c595-4219-987d-fc1add7f00f0",
+        "name": "2015-16 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/b84c2b8d-c595-4219-987d-fc1add7f00f0/download/2015-16-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2018-11-12T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2015-16-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "cf7f956124ecb35f763148f44fbee517ba256ee3077f11d4817558e40dc37c4d"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 2109,
+          "income_years": [
+            "2013-14",
+            "2014-15",
+            "2015-16"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 20,
+            "total_income": 0,
+            "taxable_income": 633,
+            "tax_payable": 770,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 1839291080139,
+            "taxable_income": 173510529521,
+            "tax_payable": 38589855576
+          }
+        },
+        "prrt": {
+          "records": 9,
+          "income_years": [
+            "2015-16"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 845484895
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2016-17",
+      "resource": {
+        "id": "5eb443b4-d0bb-4a88-a189-4523dbcd7f15",
+        "name": "2016-17 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/5eb443b4-d0bb-4a88-a189-4523dbcd7f15/download/2016-17-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2018-12-13T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2016-17-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "b7413901ccf60a16fd3aad141e809576272f56830800f737bb691f5942eba462"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 2159,
+          "income_years": [
+            "2014-15",
+            "2015-16",
+            "2016-17"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 17,
+            "total_income": 0,
+            "taxable_income": 592,
+            "tax_payable": 751,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 1868983912486,
+            "taxable_income": 190606242951,
+            "tax_payable": 45789846329.22
+          }
+        },
+        "prrt": {
+          "records": 14,
+          "income_years": [
+            "2016-17"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 945919321
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2017-18",
+      "resource": {
+        "id": "69b1061c-3769-48bd-b5a1-05e725543f6c",
+        "name": "2017-18 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/69b1061c-3769-48bd-b5a1-05e725543f6c/download/2017-18-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2020-12-10T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2017-18-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "cfa85f32a9f36d4a813fc4bcf197edb178fc1575d31ad157e814dbcd109791cd"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 2246,
+          "income_years": [
+            "2016-17",
+            "2017-18"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 21,
+            "total_income": 0,
+            "taxable_income": 582,
+            "tax_payable": 727,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 2009684711284,
+            "taxable_income": 219320308863,
+            "tax_payable": 52379457353
+          }
+        },
+        "prrt": {
+          "records": 9,
+          "income_years": [
+            "2017-18"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 1161739438
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2018-19",
+      "resource": {
+        "id": "827f68ea-83c0-440e-bb6d-4118644b7efd",
+        "name": "2018-19 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/827f68ea-83c0-440e-bb6d-4118644b7efd/download/2018-19-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2020-12-10T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2018-19-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "edc4b00aa72a3b733c3184e2b728b5dcf0b253354dc355884e2cc6aeabf81b80"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 2347,
+          "income_years": [
+            "2016-17",
+            "2017-18",
+            "2018-19"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 21,
+            "total_income": 0,
+            "taxable_income": 622,
+            "tax_payable": 764,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 2140118795991,
+            "taxable_income": 231127843044,
+            "tax_payable": 56137697940
+          }
+        },
+        "prrt": {
+          "records": 11,
+          "income_years": [
+            "2018-19"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 1057718534
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2019-20",
+      "resource": {
+        "id": "db83e667-819f-41f3-a8b7-fcb13366105b",
+        "name": "2019-20 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/db83e667-819f-41f3-a8b7-fcb13366105b/download/2019-20-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2022-01-23T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2019-20-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "9f15876e080d960aff6d09f03736c3a7dc418e0affa15ae6238594e98d9cc83b"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 2436,
+          "income_years": [
+            "2017-18",
+            "2018-19",
+            "2019-20"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 22,
+            "total_income": 0,
+            "taxable_income": 686,
+            "tax_payable": 819,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 2214208726987,
+            "taxable_income": 233226539446,
+            "tax_payable": 57719046101
+          }
+        },
+        "prrt": {
+          "records": 12,
+          "income_years": [
+            "2019-20"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 881162261
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2020-21",
+      "resource": {
+        "id": "80a01133-4281-43ce-b5ef-5535d61e1c1f",
+        "name": "2020-21 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/80a01133-4281-43ce-b5ef-5535d61e1c1f/download/2020-21-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2022-11-02T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2020-21-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "bf13e50fae95a092015664e556e204b7d28dea1211f816a4665e1e61236d0c1a"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 2520,
+          "income_years": [
+            "2018-19",
+            "2019-20",
+            "2020-21"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 19,
+            "total_income": 0,
+            "taxable_income": 670,
+            "tax_payable": 816,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 2311484379849,
+            "taxable_income": 287181260855,
+            "tax_payable": 68895227402
+          }
+        },
+        "prrt": {
+          "records": 10,
+          "income_years": [
+            "2020-21"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 925990611
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2021-22",
+      "resource": {
+        "id": "6eaf8203-a79b-43f0-9671-feeb1a44cbff",
+        "name": "2021-22 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/6eaf8203-a79b-43f0-9671-feeb1a44cbff/download/2021-22-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2024-01-16T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2021-22-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "72a111239b7680d8895741043448b4ff89264d552ea09fe4f3514e7d0f5a147f"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 2768,
+          "income_years": [
+            "2019-20",
+            "2020-21",
+            "2021-22"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 21,
+            "total_income": 0,
+            "taxable_income": 695,
+            "tax_payable": 850,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 2568944674604,
+            "taxable_income": 361096976904,
+            "tax_payable": 84111443531
+          }
+        },
+        "prrt": {
+          "records": 11,
+          "income_years": [
+            "2021-22"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 1996597665
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2022-23",
+      "resource": {
+        "id": "3281f733-6f53-431b-84f5-d824c6bd9e60",
+        "name": "2022-23 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/3281f733-6f53-431b-84f5-d824c6bd9e60/download/2022-23-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2024-10-31T00:00:00"
+      },
+      "workbook": {
+        "file": "workbooks/2022-23-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "10875380a2e8c6f1ded5900095e727195f8d68ede21d040fd33d16f531918b47"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 4049,
+          "income_years": [
+            "2020-21",
+            "2021-22",
+            "2022-23"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 35,
+            "total_income": 0,
+            "taxable_income": 1107,
+            "tax_payable": 1291,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 3163059579583,
+            "taxable_income": 404996026369,
+            "tax_payable": 98278906771
+          }
+        },
+        "prrt": {
+          "records": 11,
+          "income_years": [
+            "2022-23"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 1867057478
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2023-24",
+      "resource": {
+        "id": "491b366b-aa6f-4b1c-b39d-cebaeeb6f874",
+        "name": "2023-24 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/491b366b-aa6f-4b1c-b39d-cebaeeb6f874/download/2023-24-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2025-10-01T21:08:09.091363"
+      },
+      "workbook": {
+        "file": "workbooks/2023-24-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "6b47837efab92e1eb2b0cacc46945376a5b185c1b16814146c3282a1921b0c75"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 4198,
+          "income_years": [
+            "2021-22",
+            "2022-23",
+            "2023-24"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 36,
+            "total_income": 0,
+            "taxable_income": 971,
+            "tax_payable": 1171,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 3304046547532,
+            "taxable_income": 395670386607,
+            "tax_payable": 96095036759
+          }
+        },
+        "prrt": {
+          "records": 16,
+          "income_years": [
+            "2023-24"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 1483251276
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    },
+    {
+      "release_year": "2024-25",
+      "resource": {
+        "id": "15bf4eaa-7a14-48e9-8a3f-092df32a644e",
+        "name": "2024-25 Report of Entity Tax Information",
+        "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/15bf4eaa-7a14-48e9-8a3f-092df32a644e/download/2024-25-corporate-report-of-entity-tax-information.xlsx",
+        "last_modified": "2026-09-30T20:47:28.394158"
+      },
+      "workbook": {
+        "file": "workbooks/2024-25-corporate-report-of-entity-tax-information.xlsx",
+        "sha256": "d7772fa282c90be6aabaf5893c60d63bd0c896534b10256abed175f6a05fa754"
+      },
+      "source_sections": {
+        "income_tax": {
+          "records": 4415,
+          "income_years": [
+            "2022-23",
+            "2023-24",
+            "2024-25"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 36,
+            "total_income": 0,
+            "taxable_income": 1019,
+            "tax_payable": 1213,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "total_income": 3372672376460,
+            "taxable_income": 350582453982,
+            "tax_payable": 87826045518
+          }
+        },
+        "prrt": {
+          "records": 21,
+          "income_years": [
+            "2024-25"
+          ],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "prrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "prrt_payable": 1872820121
+          }
+        },
+        "mrrt": {
+          "records": 0,
+          "income_years": [],
+          "blank_records": {
+            "company_name": 0,
+            "abn": 0,
+            "mrrt_payable": 0,
+            "income_year": 0,
+            "source_sheet": 0,
+            "source_row": 0
+          },
+          "reported_amount_sums": {
+            "mrrt_payable": 0
+          }
+        }
+      }
+    }
+  ],
+  "alternate_workbooks": [
+    {
+      "file": "workbooks/2019-20-mirror-2019-20-corporate-report-of-entity-tax-information.xlsx",
+      "sha256": "c4e975f0718ae22855187392a868cb62cdd93bfb7bb8ceb60eb837d17b46bb8b",
+      "url": "https://data.gov.au/data/dataset/b7b40a5a-adbb-4e21-a51d-bd43ce74c3f9/resource/b68412f0-204e-4940-9437-fb101f8f6071/download/2019-20-corporate-report-of-entity-tax-information.xlsx",
+      "metadata_url": "https://data.gov.au/data/api/3/action/package_show?id=2019-20_report_of_entity_tax_information",
+      "source_licence": "Creative Commons Attribution 2.5 Australia",
+      "note": "Separately catalogued 2019-20 workbook. All income-tax, PRRT and MRRT table rows match the canonical release; not counted twice."
+    }
+  ],
+  "files": {
+    "income_tax_all_source_rows.csv": {
+      "sha256": "d440cb975126d846a8745425fa5afbdff26b2c7117683d22ae0d9b59b382cd8f",
+      "records": 34910,
+      "income_years": [
+        "2013-14",
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19",
+        "2019-20",
+        "2020-21",
+        "2021-22",
+        "2022-23",
+        "2023-24",
+        "2024-25"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 282,
+        "total_income": 0,
+        "taxable_income": 9232,
+        "tax_payable": 11228,
+        "income_year": 0,
+        "release_year": 0,
+        "source_workbook": 0,
+        "source_sheet": 0,
+        "source_row": 0
+      },
+      "reported_amount_sums": {
+        "total_income": 30138603586622,
+        "taxable_income": 3372968170685,
+        "tax_payable": 811666623940.8
+      }
+    },
+    "income_tax_history.csv": {
+      "sha256": "3bf5fdd590e28cb3d278567d40daea15fdba8719c0de0304cbc6d3cceea63dbf",
+      "records": 33051,
+      "income_years": [
+        "2013-14",
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19",
+        "2019-20",
+        "2020-21",
+        "2021-22",
+        "2022-23",
+        "2023-24",
+        "2024-25"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 272,
+        "total_income": 0,
+        "taxable_income": 8685,
+        "tax_payable": 10552,
+        "income_year": 0,
+        "release_year": 0,
+        "source_workbook": 0,
+        "source_sheet": 0,
+        "source_row": 0
+      },
+      "reported_amount_sums": {
+        "total_income": 28364246128445,
+        "taxable_income": 3194876313806,
+        "tax_payable": 769751219282.8
+      }
+    },
+    "prrt_all_source_rows.csv": {
+      "sha256": "a2443ac0bb8f201643b48b5c9019ee626570941e0c71720ef83e704cdca81a88",
+      "records": 148,
+      "income_years": [
+        "2013-14",
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19",
+        "2019-20",
+        "2020-21",
+        "2021-22",
+        "2022-23",
+        "2023-24",
+        "2024-25"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 0,
+        "prrt_payable": 0,
+        "income_year": 0,
+        "release_year": 0,
+        "source_workbook": 0,
+        "source_sheet": 0,
+        "source_row": 0
+      },
+      "reported_amount_sums": {
+        "prrt_payable": 16005225233
+      }
+    },
+    "prrt_history.csv": {
+      "sha256": "a2443ac0bb8f201643b48b5c9019ee626570941e0c71720ef83e704cdca81a88",
+      "records": 148,
+      "income_years": [
+        "2013-14",
+        "2014-15",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2018-19",
+        "2019-20",
+        "2020-21",
+        "2021-22",
+        "2022-23",
+        "2023-24",
+        "2024-25"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 0,
+        "prrt_payable": 0,
+        "income_year": 0,
+        "release_year": 0,
+        "source_workbook": 0,
+        "source_sheet": 0,
+        "source_row": 0
+      },
+      "reported_amount_sums": {
+        "prrt_payable": 16005225233
+      }
+    },
+    "mrrt_all_source_rows.csv": {
+      "sha256": "1e28eed34523b0946de4b00dafc20e23826b1fb3fa1c52b2101baaef201c61d1",
+      "records": 7,
+      "income_years": [
+        "2013-14"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 0,
+        "mrrt_payable": 0,
+        "income_year": 0,
+        "release_year": 0,
+        "source_workbook": 0,
+        "source_sheet": 0,
+        "source_row": 0
+      },
+      "reported_amount_sums": {
+        "mrrt_payable": 287856489
+      }
+    },
+    "mrrt_history.csv": {
+      "sha256": "1e28eed34523b0946de4b00dafc20e23826b1fb3fa1c52b2101baaef201c61d1",
+      "records": 7,
+      "income_years": [
+        "2013-14"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 0,
+        "mrrt_payable": 0,
+        "income_year": 0,
+        "release_year": 0,
+        "source_workbook": 0,
+        "source_sheet": 0,
+        "source_row": 0
+      },
+      "reported_amount_sums": {
+        "mrrt_payable": 287856489
+      }
+    },
+    "history_summary.csv": {
+      "sha256": "cd5abb126d17bfccd277a477487025d528345e0598e5687e8335569682d687c8"
+    }
+  },
+  "amount_units": "annual Australian dollars; original fractional dollars retained",
+  "history_selection": "Latest release for each ABN and income year. Missing ABN uses exact published name, without fuzzy matching. Combined supersedes December/March income snapshots in the first workbook. Entire rows are selected; blanks are not filled from older rows.",
+  "all_source_rows": "All table rows, including repeated 2013-14 December, March and Combined income snapshots. These files are publication archives and must not be summed without selecting a snapshot."
+}

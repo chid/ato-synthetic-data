@@ -30,6 +30,9 @@ class CompanyDataTests(unittest.TestCase):
         ])
         book = MagicMock()
         book.__getitem__.side_effect = {"Income tax details": income, "PRRT details": prrt}.__getitem__
+        income.title = "Income tax details"
+        prrt.title = "PRRT details"
+        book.__iter__.return_value = iter([income, prrt])
         return book
 
     def test_latest_release_uses_income_year_not_resource_order(self):

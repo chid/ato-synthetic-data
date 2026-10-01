@@ -1,0 +1,4 @@
+release_year,income_year,records,abn_blank_records,total_income_reported_records,total_income_reported_sum,total_income_blank_records,taxable_income_reported_records,taxable_income_reported_sum,taxable_income_blank_records,tax_payable_reported_records,tax_payable_reported_sum,tax_payable_blank_records
+2018-19,2016-17,5,0,5,1029557488,0,2,53753206,3,2,5660513,3
+2018-19,2017-18,31,0,31,10398308303,0,13,592748798,18,11,50163929,20
+2018-19,2018-19,2311,21,2311,2128690930200,0,1710,230481341040,601,1570,56081873498,741

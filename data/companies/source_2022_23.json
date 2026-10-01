@@ -1,0 +1,90 @@
+{
+  "data_kind": "real public corporate tax records, not synthetic",
+  "publisher": "Australian Taxation Office, Commonwealth of Australia",
+  "release_year": "2022-23",
+  "dataset_url": "https://data.gov.au/data/dataset/corporate-transparency",
+  "metadata_url": "https://data.gov.au/data/api/3/action/package_show?id=corporate-transparency",
+  "licence_url": "http://creativecommons.org/licenses/by/3.0/au/",
+  "retrieved_at_utc": "2026-10-01T08:37:05.656431+00:00",
+  "source_workbook": {
+    "file": "2022-23-corporate-report-of-entity-tax-information.xlsx",
+    "sha256": "10875380a2e8c6f1ded5900095e727195f8d68ede21d040fd33d16f531918b47"
+  },
+  "amount_units": "annual Australian dollars",
+  "blank_amount_meaning": "ATO does not publish amounts of zero or less. Blanks are preserved, not imputed as zero.",
+  "coverage": "Corporate income-tax entities meeting ATO's disclosure threshold, plus separately reported PRRT entities. Not all Australian companies or economic groups.",
+  "files": {
+    "companies": {
+      "file": "companies_2022_23.csv",
+      "sha256": "7262ca3918ba5e593d2fc064a2930a68bc850a593def1aa0d773c0ae55980044",
+      "records": 3985,
+      "income_years": [
+        "2022-23"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 34,
+        "total_income": 0,
+        "taxable_income": 1071,
+        "tax_payable": 1253,
+        "income_year": 0
+      },
+      "reported_amount_sums": {
+        "total_income": 3138411994835,
+        "taxable_income": 403641771083,
+        "tax_payable": 97927738897
+      }
+    },
+    "late_returns": {
+      "file": "late_returns_2022_23.csv",
+      "sha256": "7edc6b1748882894195dd8be68a5fb713b97df4960e7ffff5c0556105a305444",
+      "records": 64,
+      "income_years": [
+        "2020-21",
+        "2021-22"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 1,
+        "total_income": 0,
+        "taxable_income": 36,
+        "tax_payable": 38,
+        "income_year": 0
+      },
+      "reported_amount_sums": {
+        "total_income": 24647584748,
+        "taxable_income": 1354255286,
+        "tax_payable": 351167874
+      }
+    },
+    "prrt": {
+      "file": "prrt_2022_23.csv",
+      "sha256": "9e39352ecfb7d1faf79388ce7624c177078c2a89c8f939198c12641030c9cd4a",
+      "records": 11,
+      "income_years": [
+        "2022-23"
+      ],
+      "blank_records": {
+        "company_name": 0,
+        "abn": 0,
+        "prrt_payable": 0,
+        "income_year": 0
+      },
+      "reported_amount_sums": {
+        "prrt_payable": 1867057478
+      }
+    },
+    "summary": {
+      "file": "summary_2022_23.csv",
+      "sha256": "ffb5519a260421a0760219270f6fad70c988b48f764e4f53161c59f4eb7c1c7c"
+    }
+  },
+  "dataset_modified": "2026-09-30T20:48:15.376204",
+  "source_licence": "Creative Commons Attribution 3.0 Australia",
+  "resource": {
+    "id": "3281f733-6f53-431b-84f5-d824c6bd9e60",
+    "name": "2022-23 Report of Entity Tax Information",
+    "url": "https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/3281f733-6f53-431b-84f5-d824c6bd9e60/download/2022-23-corporate-report-of-entity-tax-information.xlsx",
+    "last_modified": "2024-10-31T00:00:00"
+  }
+}

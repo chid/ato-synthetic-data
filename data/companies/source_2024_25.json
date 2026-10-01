@@ -4,8 +4,8 @@
   "release_year": "2024-25",
   "dataset_url": "https://data.gov.au/data/dataset/corporate-transparency",
   "metadata_url": "https://data.gov.au/data/api/3/action/package_show?id=corporate-transparency",
-  "licence_url": "https://creativecommons.org/licenses/by/3.0/au/",
-  "retrieved_at_utc": "2026-10-01T07:49:57.544153+00:00",
+  "licence_url": "http://creativecommons.org/licenses/by/3.0/au/",
+  "retrieved_at_utc": "2026-10-01T08:37:06.895547+00:00",
   "source_workbook": {
     "file": "2024-25-corporate-report-of-entity-tax-information.xlsx",
     "sha256": "d7772fa282c90be6aabaf5893c60d63bd0c896534b10256abed175f6a05fa754"

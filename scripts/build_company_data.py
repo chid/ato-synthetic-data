@@ -5,6 +5,7 @@ import json
 import re
 import urllib.request
 from datetime import datetime, timezone
+from decimal import Decimal
 from pathlib import Path
 
 import openpyxl
@@ -18,7 +19,9 @@ INCOME_HEADERS = ["Name", "ABN", "Total income $", "Taxable income $", "Tax paya
 PRRT_HEADERS = ["Name", "ABN", "PRRT Payable $"]
 INCOME_COLUMNS = ["company_name", "abn", "total_income", "taxable_income", "tax_payable", "income_year"]
 PRRT_COLUMNS = ["company_name", "abn", "prrt_payable", "income_year"]
-AMOUNT_COLUMNS = ["total_income", "taxable_income", "tax_payable", "prrt_payable"]
+MRRT_COLUMNS = ["company_name", "abn", "mrrt_payable", "income_year"]
+AMOUNT_COLUMNS = ["total_income", "taxable_income", "tax_payable", "prrt_payable", "mrrt_payable"]
+SOURCE_COLUMNS = ["source_sheet", "source_row"]
 
 
 def select_resource(package, year=None):
@@ -58,7 +61,12 @@ def records_frame(rows, headers, expected_headers, columns):
     frame["abn"] = pd.array(abns, dtype="string")
     for column in AMOUNT_COLUMNS:
         if column in frame:
-            frame[column] = pd.array(frame[column], dtype="Int64")
+            values = [None if pd.isna(value) else Decimal(str(value)) for value in frame[column]]
+            integral = all(value is None or value == value.to_integral_value() for value in values)
+            frame[column] = pd.array(
+                [None if value is None else int(value) if integral else float(value) for value in values],
+                dtype="Int64" if integral else "Float64",
+            )
             if (frame[column].dropna() <= 0).any():
                 raise ValueError(f"Unexpected non-positive published amount in {column}")
     if "income_year" in frame:
@@ -68,25 +76,88 @@ def records_frame(rows, headers, expected_headers, columns):
     return frame
 
 
-def read_workbook(path, year):
+def parse_sheet(rows, sheet_name, release_year):
+    records = {"income_tax": [], "prrt": [], "mrrt": []}
+    kind = None
+    header = None
+    income_year = sheet_name if re.fullmatch(r"20\d{2}-\d{2}", sheet_name) else release_year
+    for row_number, raw_row in enumerate(rows, 1):
+        row = list(raw_row)
+        if not any(value is not None and value != "" for value in row):
+            continue
+        first = row[0]
+        if isinstance(first, str) and (first.startswith("Income tax information")
+                                       or first.startswith("PRRT information")
+                                       or first.startswith("MRRT information")
+                                       or first.startswith("This list consists")
+                                       or first in ("PRRT", "MRRT")):
+            continue
+        if first == "Name":
+            while row and row[-1] is None:
+                row.pop()
+            header = row
+            normalized = [str(value).lower() for value in header]
+            if normalized == [value.lower() for value in INCOME_HEADERS]:
+                kind = "income_tax"
+            elif normalized == [value.lower() for value in INCOME_HEADERS[:-1]]:
+                kind = "income_tax"
+            elif normalized == [value.lower() for value in PRRT_HEADERS]:
+                kind = "prrt"
+            elif normalized == ["name", "abn", "mrrt payable $"]:
+                kind = "mrrt"
+            else:
+                raise ValueError(f"Unexpected source columns in {sheet_name}: {header!r}")
+            continue
+        if kind is None:
+            raise ValueError(f"Record before a recognized header in {sheet_name}:{row_number}")
+        if any(value is not None and value != "" for value in row[len(header):]):
+            raise ValueError(f"Unexpected extra source values in {sheet_name}:{row_number}")
+        values = (row + [None] * len(header))[:len(header)]
+        if kind != "income_tax" or len(header) == 5:
+            values.append(income_year)
+        records[kind].append(values + [sheet_name, row_number])
+    return records
+
+
+def read_source_records(path, year):
     book = openpyxl.load_workbook(path, read_only=True, data_only=True)
+    rows = {"income_tax": [], "prrt": [], "mrrt": []}
     try:
-        income_rows = book["Income tax details"].iter_rows(values_only=True)
-        headers = next(income_rows)
-        income = records_frame(list(income_rows), headers, INCOME_HEADERS, INCOME_COLUMNS)
-        prrt_rows = book["PRRT details"].iter_rows(values_only=True)
-        headers = next(prrt_rows)
-        prrt = records_frame(list(prrt_rows), headers, PRRT_HEADERS, PRRT_COLUMNS[:-1])
-        prrt["income_year"] = pd.array([year] * len(prrt), dtype="string")
+        for sheet in book:
+            if sheet.title == "Information":
+                continue
+            parsed = parse_sheet(sheet.iter_rows(values_only=True), sheet.title, year)
+            for kind in rows:
+                rows[kind].extend(parsed[kind])
     finally:
         book.close()
+    frames = {}
+    for kind, columns in (("income_tax", INCOME_COLUMNS), ("prrt", PRRT_COLUMNS), ("mrrt", MRRT_COLUMNS)):
+        frame = records_frame(rows[kind], columns, columns, columns + SOURCE_COLUMNS)
+        frame["source_sheet"] = frame["source_sheet"].astype("string")
+        frame["source_row"] = pd.array(frame["source_row"], dtype="Int64")
+        frames[kind] = frame
+    return frames
+
+
+def read_workbook(path, year):
+    source = read_source_records(path, year)
+    income = source["income_tax"]
+    # The first workbook repeats December and March income rows in Combined.
+    if "Combined" in income["source_sheet"].values:
+        income = income.loc[income["source_sheet"].eq("Combined")]
+    income = income[INCOME_COLUMNS].reset_index(drop=True)
+    prrt = source["prrt"][PRRT_COLUMNS].reset_index(drop=True)
     current = income.loc[income["income_year"].eq(year)].reset_index(drop=True)
     late = income.loc[~income["income_year"].eq(year)].reset_index(drop=True)
     if current.empty:
         raise ValueError(f"Workbook contains no income-tax records for {year}")
     if (late["income_year"] > year).any():
         raise ValueError("Workbook contains a later income year than its release year")
-    return {"companies": current, "late_returns": late, "prrt": prrt}
+    frames = {"companies": current, "late_returns": late, "prrt": prrt}
+    if not source["mrrt"].empty:
+        frames["mrrt"] = source["mrrt"][MRRT_COLUMNS].reset_index(drop=True)
+    return frames
 
 
 def summary_frame(frames, year):
@@ -97,7 +168,7 @@ def summary_frame(frames, year):
                "abn_blank_records": int(group["abn"].isna().sum())}
         for column in INCOME_COLUMNS[2:5]:
             row[f"{column}_reported_records"] = int(group[column].count())
-            row[f"{column}_reported_sum"] = int(group[column].sum())
+            row[f"{column}_reported_sum"] = amount_sum(group[column])
             row[f"{column}_blank_records"] = int(group[column].isna().sum())
         rows.append(row)
     return pd.DataFrame(rows)
@@ -107,12 +178,17 @@ def file_hash(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def amount_sum(values):
+    total = sum((Decimal(str(value)) for value in values.dropna()), Decimal(0))
+    return int(total) if total == total.to_integral_value() else float(total)
+
+
 def controls(frame):
     return {
         "records": len(frame),
         "income_years": sorted(frame["income_year"].unique().tolist()),
         "blank_records": {column: int(frame[column].isna().sum()) for column in frame},
-        "reported_amount_sums": {column: int(frame[column].sum()) for column in AMOUNT_COLUMNS if column in frame},
+        "reported_amount_sums": {column: amount_sum(frame[column]) for column in AMOUNT_COLUMNS if column in frame},
     }
 
 
@@ -134,7 +210,7 @@ def build(workbook, out_dir, year, package=None, resource=None):
         "release_year": year,
         "dataset_url": DATASET_URL,
         "metadata_url": PACKAGE_URL,
-        "licence_url": LICENCE_URL,
+        "licence_url": package.get("license_url", LICENCE_URL) if package else LICENCE_URL,
         "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
         "source_workbook": {"file": workbook.name, "sha256": file_hash(workbook)},
         "amount_units": "annual Australian dollars",
@@ -153,13 +229,15 @@ def build(workbook, out_dir, year, package=None, resource=None):
 
 
 def read_csv(path, columns):
-    types = {column: "Int64" if column in AMOUNT_COLUMNS else "string" for column in columns}
     frame = pd.read_csv(
-        path, dtype=types, keep_default_na=False,
+        path, dtype="string", keep_default_na=False,
         na_values={column: [""] for column in columns if column != "company_name"},
     )
     if list(frame.columns) != columns:
         raise ValueError(f"Unexpected CSV columns in {path.name}")
+    frame = records_frame(frame.itertuples(index=False, name=None), columns, columns, columns)
+    if "source_row" in frame:
+        frame["source_row"] = pd.array(frame["source_row"], dtype="Int64")
     return frame
 
 
@@ -167,7 +245,10 @@ def validate(manifest_path, workbook=None):
     manifest = json.loads(manifest_path.read_text())
     year = manifest["release_year"]
     frames = {}
-    for kind, columns in (("companies", INCOME_COLUMNS), ("late_returns", INCOME_COLUMNS), ("prrt", PRRT_COLUMNS)):
+    sections = [("companies", INCOME_COLUMNS), ("late_returns", INCOME_COLUMNS), ("prrt", PRRT_COLUMNS)]
+    if "mrrt" in manifest["files"]:
+        sections.append(("mrrt", MRRT_COLUMNS))
+    for kind, columns in sections:
         expected = manifest["files"][kind]
         path = manifest_path.parent / expected["file"]
         if file_hash(path) != expected["sha256"]:
@@ -188,7 +269,7 @@ def validate(manifest_path, workbook=None):
             raise ValueError("Source workbook checksum does not match the manifest")
         source = read_workbook(workbook, year)
         for kind in frames:
-            pd.testing.assert_frame_equal(frames[kind], source[kind])
+            pd.testing.assert_frame_equal(frames[kind], source[kind], check_dtype=False, check_exact=True)
     return manifest
 
 

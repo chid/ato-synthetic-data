@@ -1,0 +1,4 @@
+release_year,income_year,records,abn_blank_records,total_income_reported_records,total_income_reported_sum,total_income_blank_records,taxable_income_reported_records,taxable_income_reported_sum,taxable_income_blank_records,tax_payable_reported_records,tax_payable_reported_sum,tax_payable_blank_records
+2023-24,2021-22,9,0,9,3222376191,0,5,191001299,4,5,57250374,4
+2023-24,2022-23,79,3,79,22049368172,0,54,1310834400,25,48,333117913,31
+2023-24,2023-24,4110,33,4110,3278774803169,0,3168,394168550908,942,2974,95704668472,1136

@@ -19,11 +19,17 @@ The backtest validators compare predicted median income with the current synthet
 
 ### Named public company data
 
+All 12 corporate tax-transparency releases, 2013-14 through 2024-25, were downloaded and validated. The combined history contains 33,051 income-tax entity-year rows, 148 PRRT rows and 7 MRRT rows. The income-tax publication archive retains all 34,910 source rows, including the early December/March/Combined snapshots. Original workbook checksums are included. The separately catalogued 2019-20 copy has a different binary checksum but identical tax-table values.
+
+An independent check read every exported archive row using the standard-library CSV reader and compared names, ABNs, financial values, blanks and income years with its original workbook sheet and row. It also accounted for every populated financial source row. The two source amounts containing fractional dollars were preserved. Canonical histories were verified against the declared latest-release selection and source controls.
+
+The CbC download checks covered the complete 43-dataset ATO catalogue, file checksums and every value in the 33,024-row Taxplorer CSV against its Excel counterpart. The JSON website file is separately recorded with 32,964 rows, rounded amounts and no adjustment rows. The bank workbook has 6,587 rows, including 121 labelled computed or modified data. CbC figures were not individually audited against all original company filings. All nineteen repository tests pass.
+
 The latest corporate tax-transparency release was discovered through the official data.gov.au metadata API on 1 October 2026. The downloaded 2024-25 workbook's SHA-256 is recorded in `data/companies/source_2024_25.json`. Every name, published ABN, integer amount, blank and income-year label was compared with the original worksheet rows after CSV export.
 
 The current-year file contains 4,299 records. It matches source sums of $3,342,185,114,932 total income, $349,136,493,123 taxable income and $87,488,527,889 tax payable. All 961 blank taxable-income values, 1,149 blank tax-payable values and 31 blank ABNs are preserved. Separate files retain all 116 late returns and all 21 PRRT records. The PRRT amount sum is $1,872,820,121.
 
-Four company-data tests cover latest-release selection, separating income years, literal source values, blank amounts, missing ABNs, CSV roundtrips, unexpected headers and changed-file detection. All fourteen repository tests pass. The offline validator checks the exported files against the manifest and summary. With `--workbook`, it also compares all source records. These are exact disclosure-data checks, distinct from the synthetic distribution comparisons below.
+Four company-data tests cover latest-release selection, separating income years, literal source values, blank amounts, missing ABNs, CSV roundtrips, unexpected headers and changed-file detection. All nineteen repository tests pass. The offline validator checks the exported files against the manifest and summary. With `--workbook`, it also compares all source records. These are exact disclosure-data checks, distinct from the synthetic distribution comparisons below.
 
 ### Fictional display names
 
