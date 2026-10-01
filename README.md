@@ -52,7 +52,7 @@ The simulation writes an uncompressed panel locally. The longitudinal validator 
 
 ## How it works
 
-The static generator samples sex, taxable status, age range and income bracket jointly from ATO Table 3A. It refines taxable income using Table 16B percentiles, draws ages using ABS population counts, assigns geography from ATO Table 6A, and assigns industry from Census G54. Financial items use published cell-level presence rates and means, with assumed Gamma distribution shapes.
+The static generator samples sex, taxable status, age range and income bracket jointly from ATO Table 3A. It refines taxable income using Table 16B percentiles, draws ages using ABS population counts, assigns geography from ATO Table 6A, and assigns industry from Census G54. Financial items use published cell-level presence rates and means, with assumed Gamma distribution shapes. Item amounts preserve the source mean's sign, including negative rental losses.
 
 The longitudinal model adds mortality, entrants and income rank persistence. Its income growth target is an assumption calibrated from historical aggregate growth. Backtests start from older tax tables and compare projected outcomes with the 2022-23 aggregates.
 
@@ -64,6 +64,14 @@ The longitudinal model adds mortality, entrants and income rank persistence. Its
 - Backtests hold historical taxable-status relationships fixed and can miss changes in tax policy. Historical observation periods do not prove that a source was available at the forecast date. See the [release-date correction](SOURCES.md#backtest-source-date-correction).
 
 [APPROACH.md](APPROACH.md) and the [original workflow notes](docs/original-readme.md) preserve the development history and earlier results. Some passages describe earlier model versions. The commands and packaging above describe this public copy.
+
+## Regression tests
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+The tests check signed rental losses in both samplers and preserve positive and zero item behavior. The [verification notes](docs/verification.md) include current sample comparisons.
 
 ## Sources and reuse
 

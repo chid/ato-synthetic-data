@@ -37,7 +37,7 @@ def main():
     # --- taxable income distribution ---
     real_total_individuals = real_cells["Individuals | count"].sum()
     real_total_taxable_income = real_cells["Taxable income or loss2 | dollars"].sum()
-    real_mean_ti = real_total_taxable_income / real_cells["Taxable income or loss2 | count"].sum()
+    real_mean_ti = real_total_taxable_income / real_total_individuals
 
     print("\n-- Taxable income (vs ATO Table 3A, all lodgers 2022-23) --")
     print(f"{'':28s}{'synthetic':>16s}{'real (ATO)':>16s}")
@@ -75,6 +75,9 @@ def main():
         ("total_deductions", "Total deductions2"),
         ("deduction_car_expenses", "Total work related car expenses"),
         ("net_capital_gain", "Capital gains net capital gain"),
+        ("net_rent_profit", "Net rent - profit"),
+        ("net_rent_loss", "Net rent - loss"),
+        ("net_tax", "Net tax"),
     ]
     print("\n-- Selected item presence-rate & mean-when-present: synthetic vs real --")
     print(f"{'item':30s}{'syn p(present)':>16s}{'real p(present)':>16s}{'syn mean$':>14s}{'real mean$':>14s}")
@@ -84,11 +87,19 @@ def main():
         real_p = real_count / real_total_individuals
         real_mean = real_dollars / real_count if real_count else float("nan")
 
-        syn_present = syn[col] > 0
+        syn_present = syn[col].abs() > 0
         syn_p = syn_present.mean()
         syn_mean = syn.loc[syn_present, col].mean() if syn_present.any() else float("nan")
 
         print(f"{col:30s}{syn_p:16.3f}{real_p:16.3f}{syn_mean:14,.0f}{real_mean:14,.0f}")
+
+    print("\n-- Net rental income, mean across all lodgers --")
+    syn_net_rent = syn["net_rent_profit"] + syn["net_rent_loss"]
+    real_net_rent = (
+        real_cells["Net rent - profit | dollars"].sum()
+        + real_cells["Net rent - loss | dollars"].sum()
+    ) / real_total_individuals
+    print(f"  synthetic: ${syn_net_rent.mean():,.2f}; real (ATO): ${real_net_rent:,.2f}")
 
     # --- state split: synthetic vs ATO Table 6A (the source it was drawn from) ---
     print("\n-- State split: synthetic vs ATO Table 6A (source) --")

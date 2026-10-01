@@ -17,10 +17,25 @@ The backtest validators compare predicted median income with the current synthet
 
 ## Public-copy changes
 
+### Signed loss correction
+
+The static and 2012-13 item samplers previously discarded negative source means. They now sample the absolute amount and restore the source sign. This also fixes losses in the longitudinal simulation, which reuses the static item sampler. The static sample, longitudinal panel and 2012-13 snapshot were regenerated with seed 42. The 2009-10 sampler already preserved signs.
+
+Three regression tests pass. Before the fix, two failed with "Rental losses were all zero" and "The 2013 backtest discarded signed rental losses". The positive and zero item test passed before and after the correction. In the static sample, only `net_rent_loss` and `total_income` changed. Both affected annual summary files were unchanged.
+
+| Statistic, across all lodgers | Synthetic | ATO |
+| --- | ---: | ---: |
+| Rental-loss presence | 7.565% | 7.010% |
+| Mean rental loss | -$701.90 | -$655.17 |
+| Mean rental profit | $767.01 | $753.98 |
+| Mean net rental income | $65.11 | $98.81 |
+
+The validator counts negative amounts as present and compares taxable-income means using the same all-lodger denominator. Preserving signed losses fixes the discarded-loss bug. Aggregate sample differences and independent financial draws remain.
+
 The publishing copy has a fresh Git history. It excludes the original virtual environment, Python caches, filesystem metadata, raw source downloads and downloaded web archives. The included input tables are published aggregates.
 
 The public copy adds two small processed inputs so generation and validation run without source downloads: Census G01 national population counts by sex and ABS quarterly national population totals. The relevant readers use these CSVs. The longitudinal validator can also read the compressed panel.
 
 Source and documentation scans checked for common credential formats, embedded credentials in URLs, private network references, local user paths and personal identifier columns. The region-name column `GCCSA NAME` contains geographic labels such as Greater Sydney, not person names. No credentials or person identifiers were found in the published files under these checks.
 
-Dataset integrity checksums are in [SHA256SUMS](../SHA256SUMS). The original project's source files and datasets were unchanged.
+Dataset integrity checksums are in [SHA256SUMS](../SHA256SUMS). The signed-loss correction and regenerated affected datasets were also applied to the original workspace.

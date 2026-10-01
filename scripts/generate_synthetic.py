@@ -80,7 +80,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PROCESSED = ROOT / "data" / "processed"
 
 # base item names (as they appear in ato_table3a_items_by_bracket.csv, before " | count"/" | dollars")
-# -> (output column name, gamma shape parameter, allow_negative_display)
+# -> (output column name, gamma shape parameter)
 ITEMS = {
     "Salary or wages": ("salary_or_wages", 3.0),
     "Allowances earnings tips directors fees etc": ("allowances_tips_directors_fees", 1.2),
@@ -468,9 +468,9 @@ def draw_items(rng, cells):
 
         mean_amt = np.divide(dollars, counts, out=np.zeros(n), where=counts > 0)
         mean_amt = np.nan_to_num(mean_amt)
-        scale = np.divide(mean_amt, shape, out=np.zeros(n), where=mean_amt > 0)
-        amounts = rng.gamma(shape=shape, scale=np.maximum(scale, 1e-9))
-        amounts = np.where(present & (mean_amt > 0), amounts, 0.0)
+        scale = np.divide(np.abs(mean_amt), shape, out=np.zeros(n), where=mean_amt != 0)
+        amounts = rng.gamma(shape=shape, scale=np.maximum(scale, 1e-9)) * np.sign(mean_amt)
+        amounts = np.where(present & (mean_amt != 0), amounts, 0.0)
         out[col] = np.round(amounts, 2)
     return out
 

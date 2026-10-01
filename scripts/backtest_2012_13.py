@@ -232,9 +232,10 @@ def generate_2013_population(n_rows: int, seed: int = 42) -> pd.DataFrame:
         p_present = np.clip(np.divide(counts, individuals, out=np.zeros(n), where=individuals > 0), 0, 1)
         present = rng.random(n) < np.nan_to_num(p_present)
         mean_amt = np.divide(dollars, counts, out=np.zeros(n), where=counts > 0)
-        scale = np.divide(mean_amt, shape, out=np.zeros(n), where=mean_amt > 0)
-        amounts = rng.gamma(shape=shape, scale=np.maximum(np.nan_to_num(scale), 1e-9))
-        out[col] = np.round(np.where(present & (mean_amt > 0), amounts, 0.0), 2)
+        mean_amt = np.nan_to_num(mean_amt)
+        scale = np.divide(np.abs(mean_amt), shape, out=np.zeros(n), where=mean_amt != 0)
+        amounts = rng.gamma(shape=shape, scale=np.maximum(scale, 1e-9)) * np.sign(mean_amt)
+        out[col] = np.round(np.where(present & (mean_amt != 0), amounts, 0.0), 2)
 
     return out
 

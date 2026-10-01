@@ -39,7 +39,7 @@ Read `postcode` as text if its formatting matters. The source combines Census po
 | `deduction_gifts_donations` | Gift and donation deductions |
 | `total_deductions` | Total deductions, sampled separately from component deductions |
 | `net_rent_profit` | Rental profit item |
-| `net_rent_loss` | Rental loss source item; see the caveat below |
+| `net_rent_loss` | Rental loss amount, recorded as a negative value |
 | `total_income` | Total income item, sampled separately from taxable income |
 | `reportable_employer_super` | Reportable employer superannuation contributions |
 | `personal_super_contributions` | Personal superannuation contributions |
@@ -48,7 +48,7 @@ Read `postcode` as text if its formatting matters. The source combines Census po
 | `net_tax` | Net tax item, sampled from published cell totals rather than calculated from income |
 | `medicare_levy` | Medicare levy item, sampled rather than calculated |
 
-The current item sampler only draws positive dollar amounts. Source items with nonpositive cell means, including some loss items, become zero. Financial fields are not a reconciled tax return; adding components or subtracting deductions need not reproduce the independently drawn totals.
+The item sampler preserves the sign of each source cell's mean. Losses are negative, so net rental income is `net_rent_profit + net_rent_loss`. A zero cell mean or an absent item produces zero. A source cell containing a mix of positive and negative values supplies only its net mean; this model does not reconstruct that mix. Financial fields are not a reconciled tax return; adding components or subtracting deductions need not reproduce the independently drawn totals.
 
 ## Longitudinal and backtest outputs
 
