@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+._*
+.env
+.env.*
+*.pem
+*.key
+/data/raw/
+/synthetic/longitudinal_panel.csv
+/verification/
