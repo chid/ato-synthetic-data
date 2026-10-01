@@ -76,6 +76,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import generate_names as names
+
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED = ROOT / "data" / "processed"
 
@@ -444,7 +446,7 @@ def generate(n_rows: int, seed: int = 42) -> pd.DataFrame:
     for col, values in draw_items(rng, cells).items():
         out[col] = values
 
-    return out
+    return names.add_names(out, seed=seed)
 
 
 def draw_items(rng, cells):

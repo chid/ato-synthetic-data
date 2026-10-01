@@ -47,4 +47,6 @@ The original development notes and some code comments describe the AGA 2010-12 l
 
 The project creates every row in `synthetic/` by random sampling and simulation. The outputs are neither ATO taxpayer records nor ABS microdata. Geographic codes and demographic categories come from public aggregates.
 
+Fictional display names are generated with [Faker](https://faker.readthedocs.io/en/master/) version 40.40.0 using its [Australian English locale](https://faker.readthedocs.io/en/master/locales/en_AU.html). Faker is an [MIT-licensed dependency](https://github.com/joke2k/faker/blob/v40.40.0/LICENSE.txt). Names are generated independently of financial values and do not represent the name frequencies of the ATO population.
+
 The project-created outputs are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Credit `chid/ato-synthetic-data` and retain attribution to ATO, ABS and AGA for the underlying sources. None of these agencies endorses this project.

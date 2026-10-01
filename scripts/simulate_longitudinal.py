@@ -74,6 +74,7 @@ import pandas as pd
 from scipy.stats import norm
 
 import generate_synthetic as gen
+import generate_names as names
 
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED = ROOT / "data" / "processed"
@@ -350,7 +351,7 @@ def simulate(n_start: int, n_years: int, seed: int = 42):
 
     panel = pd.concat(panel_rows, ignore_index=True)
     summary = pd.DataFrame(summary_rows)
-    return panel, summary
+    return names.add_names(panel, seed=seed), summary
 
 
 def main():

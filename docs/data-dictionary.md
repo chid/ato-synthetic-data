@@ -17,6 +17,16 @@ The main `synthetic/synthetic_individuals.csv` sample has the columns below. Cat
 
 Read `postcode` as text if its formatting matters. The source combines Census postal areas with ATO postcode categories; neither field is an individual's address.
 
+## Fictional names
+
+| Column | Meaning |
+| --- | --- |
+| `first_name` | Generated given name, using the source sex category when available |
+| `last_name` | Generated surname |
+| `full_name` | Given name and surname joined with a space, without titles |
+
+These display names come from Faker's `en_AU` locale, not tax records or Census microdata. Their distribution is illustrative. They are unrelated to financial amounts or geography and may repeat. In the longitudinal panel, names are stable for each `agent_id`. The three columns are also included in the two backtest snapshots.
+
 ## Financial fields
 
 | Column | Meaning |

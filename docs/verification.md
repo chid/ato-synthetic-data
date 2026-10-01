@@ -17,6 +17,12 @@ The backtest validators compare predicted median income with the current synthet
 
 ## Public-copy changes
 
+### Fictional display names
+
+All population datasets now include `first_name`, `last_name` and `full_name`, generated with Faker 40.40.0 in the `en_AU` locale. The standalone `scripts/generate_names.py` command produces a seeded CSV. Names use an independent random generator. The longitudinal panel assigns one name per unique `agent_id`, so new entrants receive their own generated names and returning agents keep theirs.
+
+Seven name tests cover the exact seeded CLI output, repeatability, independent global random state, SeedSequence support, preservation of existing records, agent identity and invalid counts. Together with the three signed-item tests, ten tests pass. All four population outputs were regenerated with the existing model seeds. Comparisons against the previous committed datasets verify that every pre-existing column and all annual summaries are unchanged.
+
 ### Signed loss correction
 
 The static and 2012-13 item samplers previously discarded negative source means. They now sample the absolute amount and restore the source sign. This also fixes losses in the longitudinal simulation, which reuses the static item sampler. The static sample, longitudinal panel and 2012-13 snapshot were regenerated with seed 42. The 2009-10 sampler already preserved signs.
@@ -36,6 +42,6 @@ The publishing copy has a fresh Git history. It excludes the original virtual en
 
 The public copy adds two small processed inputs so generation and validation run without source downloads: Census G01 national population counts by sex and ABS quarterly national population totals. The relevant readers use these CSVs. The longitudinal validator can also read the compressed panel.
 
-Source and documentation scans checked for common credential formats, embedded credentials in URLs, private network references, local user paths and personal identifier columns. The region-name column `GCCSA NAME` contains geographic labels such as Greater Sydney, not person names. No credentials or person identifiers were found in the published files under these checks.
+Source and documentation scans checked for common credential formats, embedded credentials in URLs, private network references, local user paths and unintended identifier columns. The region-name column `GCCSA NAME` contains geographic labels such as Greater Sydney. The three new name columns are deliberately generated display labels. No real-person source records or credentials are included.
 
 Dataset integrity checksums are in [SHA256SUMS](../SHA256SUMS). The signed-loss correction and regenerated affected datasets were also applied to the original workspace.

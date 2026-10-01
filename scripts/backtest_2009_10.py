@@ -32,6 +32,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import generate_synthetic as gen
+import generate_names as names
 import simulate_longitudinal as sim
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -235,7 +236,7 @@ def run_backtest(n_start=20000, n_years=13, seed=42):
               f"median=${stats['median_taxable_income']:,.0f}  "
               f"%taxable={stats['pct_taxable']:.1f}")
 
-    return pop, pd.DataFrame(summary_rows)
+    return names.add_names(pop, seed=seed), pd.DataFrame(summary_rows)
 
 
 def main():

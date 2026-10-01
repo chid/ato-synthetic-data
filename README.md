@@ -1,8 +1,8 @@
 # ATO synthetic tax data
 
-Synthetic Australian individual tax records generated from published ATO, ABS and Census aggregate statistics. The main sample has 20,000 rows and 34 columns, calibrated to the 2022-23 income year.
+Synthetic Australian individual tax records generated from published ATO, ABS and Census aggregate statistics. The main sample has 20,000 rows and 37 columns, calibrated to the 2022-23 income year.
 
-Every individual record is simulated. The project uses public aggregate tables, without taxpayer unit records, names, tax file numbers, contact details or private account data. Postcodes are geographic categories, and longitudinal `agent_id` values identify simulated people. This is an independent project, without government endorsement.
+Every individual record is simulated. The project uses public aggregate tables, without taxpayer unit records, real taxpayer names, tax file numbers, contact details or private account data. Display names are fictional. Postcodes are geographic categories, and longitudinal `agent_id` values identify simulated people. This is an independent project, without government endorsement.
 
 ## Download the data
 
@@ -56,6 +56,19 @@ The static generator samples sex, taxable status, age range and income bracket j
 
 The longitudinal model adds mortality, entrants and income rank persistence. Its income growth target is an assumption calibrated from historical aggregate growth. Backtests start from older tax tables and compare projected outcomes with the 2022-23 aggregates.
 
+## Fictional names
+
+Every population dataset includes `first_name`, `last_name` and `full_name`. Names use Faker's `en_AU` locale with an independent seeded random generator. The source sex category selects the given-name pool when available. Names are illustrative; their frequencies do not model Australian age or ancestry distributions, and they are unrelated to income or geography. Names may repeat, so use `agent_id` to identify a person in the longitudinal panel. Each agent keeps the same name across all their years, including new entrants.
+
+Generate a separate CSV of names:
+
+```sh
+python3 scripts/generate_names.py --n 10 --seed 42
+python3 scripts/generate_names.py --n 100 --seed 7 --out synthetic/names.csv
+```
+
+The first command prints CSV to stdout. Add `--sex Male` or `--sex Female` to select a given-name pool. Repeating a seed with the pinned Faker version gives the same names. Adding names does not change financial values or simulation results.
+
 ## Limitations
 
 - Financial items are sampled separately. Their sum need not reconcile with taxable income, total deductions or net tax. These records are useful for experiments and demonstrations, rather than tax calculations.
@@ -71,7 +84,7 @@ The longitudinal model adds mortality, entrants and income rank persistence. Its
 python3 -m unittest discover -s tests -v
 ```
 
-The tests check signed rental losses in both samplers and preserve positive and zero item behavior. The [verification notes](docs/verification.md) include current sample comparisons.
+The tests check signed rental losses, seeded name generation, CSV output and stable names for longitudinal agents. The [verification notes](docs/verification.md) include current sample comparisons.
 
 ## Sources and reuse
 
