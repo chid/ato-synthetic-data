@@ -1,10 +1,14 @@
-# ATO synthetic and public tax data
+# ATO synthetic data
 
-Synthetic Australian individual tax records generated from published ATO, ABS and Census aggregate statistics. The main sample has 20,000 rows and 37 columns, calibrated to the 2022-23 income year.
+Synthetic Australian individual tax records generated from published ATO, ABS and Census aggregate statistics. The main sample has 20,000 rows, calibrated to the 2022-23 income year.
 
-The repository also includes [33,051 real company-year records](data/companies/income_tax_history.csv) from all 12 ATO corporate tax-transparency releases, covering 2013-14 through 2024-25. The latest release contains [4,299 current-year companies](data/companies/companies_2024_25.csv). These records retain the published names and financial figures and are stored separately from the synthetic people.
+Every individual record is simulated from public aggregate tables. The individual model uses no real-person taxpayer records, names, tax file numbers, contact details or private account data. Postcodes are geographic categories, and longitudinal `agent_id` values identify simulated people. This is an independent project, without government endorsement.
 
-Every individual record is simulated from public aggregate tables. The individual model uses no real-person taxpayer records, names, tax file numbers, contact details or private account data. Its display names are fictional. Postcodes are geographic categories, and longitudinal `agent_id` values identify simulated people. This is an independent project, without government endorsement.
+Real, named corporate tax disclosures previously included here have moved to a
+separate repo: [`ato-company-tax-data`](https://github.com/chid/ato-company-tax-data).
+Mixing real named-entity records with synthetic individual records in one repo made it
+easy to confuse which rows were real and which were simulated — they're unrelated
+datasets answering unrelated questions, so they're now unrelated repos.
 
 ## Download the synthetic data
 
@@ -26,49 +30,6 @@ panel = pd.read_csv("synthetic/longitudinal_panel.csv.gz", dtype={"postcode": "s
 ```
 
 Amounts are annual Australian dollars except `help_debt_balance`, which is a debt balance. See the [data dictionary](docs/data-dictionary.md) for the columns.
-
-## Public company data
-
-The [ATO 2024-25 corporate tax-transparency workbook](https://data.gov.au/data/dataset/corporate-transparency) was released on 1 October 2026. Its income-tax records cover corporate entities meeting ATO's disclosure threshold of $100 million total income. This is a large-company disclosure dataset, not a census of Australian companies.
-
-| File | Rows | Description |
-| --- | ---: | --- |
-| [companies_2024_25.csv](data/companies/companies_2024_25.csv) | 4,299 | Real company names, published ABNs, total income, taxable income and tax payable |
-| [late_returns_2024_25.csv](data/companies/late_returns_2024_25.csv) | 116 | Late 2022-23 and 2023-24 returns included in the same release |
-| [prrt_2024_25.csv](data/companies/prrt_2024_25.csv) | 21 | Separately published petroleum resource rent tax records |
-| [summary_2024_25.csv](data/companies/summary_2024_25.csv) | 3 | Income-tax counts, published dollar sums and blank counts by income year |
-| [income_tax_history.csv](data/companies/income_tax_history.csv) | 33,051 | Company-year history, using each entity's latest published row for that income year |
-| [income_tax_all_source_rows.csv](data/companies/income_tax_all_source_rows.csv) | 34,910 | Publication archive retaining all source rows and repeated early snapshots |
-| [prrt_history.csv](data/companies/prrt_history.csv) | 148 | Historical PRRT records |
-| [mrrt_history.csv](data/companies/mrrt_history.csv) | 7 | Published MRRT records from 2013-14 |
-
-Every annual release has its own CSVs and source manifest. The [original workbooks](data/companies/workbooks/) are included, along with the separately catalogued 2019-20 copy, whose table values match the main dataset. Historical amounts retain the source's fractional dollars where present. The combined history includes late returns under their actual income years. It matches ABNs where published and exact company names when ABNs are absent. The archive contains repeated publication snapshots and should not be summed as an entity-year dataset.
-
-Amounts are annual AUD. ATO leaves amounts of zero or less blank, and the CSVs preserve those blanks. ABNs are text identifiers and remain blank where unpublished. The current-year published tax-payable amounts sum to $87,488,527,889. Late returns and PRRT are excluded from that sum.
-
-Refresh from the latest release, or validate the included CSVs offline:
-
-```sh
-python3 scripts/build_company_data.py
-python3 scripts/build_company_data.py --validate-only
-python3 scripts/build_company_history.py
-python3 scripts/build_company_history.py --validate-only
-```
-
-The refresh downloads the official workbook into the ignored `data/raw/` directory, exports each source section and verifies every row against it. Use `--year 2024-25` to select that release explicitly. The [company data guide](docs/company-data.md) explains the fields, scope and offline reproduction. [Source metadata](data/companies/source_2024_25.json) records the source URL, licence, workbook checksum and export controls.
-
-## Public country-by-country records
-
-The [CbC downloader](scripts/download_public_cbc.py) checks every dataset in ATO's public data.gov.au catalogue and downloads unchanged international public CbC datasets:
-
-```sh
-python3 scripts/download_public_cbc.py
-python3 scripts/download_public_cbc.py --validate-only
-```
-
-On 1 October 2026, no CbC dataset was found among the 43 ATO catalogue entries. [ATO guidance](https://www.ato.gov.au/api/public/content/0-cdf60d77-063d-404a-a585-e36ee1e00e9c) expects its first public CbC publication in late 2026. The existing [Taxplorer database](https://www.taxplorer.eu/data/) provides 33,024 CSV/Excel rows for 1,020 multinational groups, and the [bank CbC workbook](https://taxobservatory.eu/repository/banks-country-by-country-reporting/) provides 6,587 records for 36 banks. These sources have different populations and units.
-
-The CbC files are downloaded to the ignored `data/cbc/downloads/` directory. Taxplorer's [terms](https://www.taxplorer.eu/licence/) require permission to republish its database and a licence for business use, so its data is kept local. Source links, download checksums and observed coverage are public in [data/cbc/sources.json](data/cbc/sources.json). See the [CbC guide](data/cbc/README.md) for units, format differences and reuse terms.
 
 ## Run the generator
 
@@ -101,19 +62,6 @@ The static generator samples sex, taxable status, age range and income bracket j
 
 The longitudinal model adds mortality, entrants and income rank persistence. Its income growth target is an assumption calibrated from historical aggregate growth. Backtests start from older tax tables and compare projected outcomes with the 2022-23 aggregates.
 
-## Fictional names
-
-Every population dataset includes `first_name`, `last_name` and `full_name`. Names use Faker's `en_AU` locale with an independent seeded random generator. The source sex category selects the given-name pool when available. Names are illustrative; their frequencies do not model Australian age or ancestry distributions, and they are unrelated to income or geography. Names may repeat, so use `agent_id` to identify a person in the longitudinal panel. Each agent keeps the same name across all their years, including new entrants.
-
-Generate a separate CSV of names:
-
-```sh
-python3 scripts/generate_names.py --n 10 --seed 42
-python3 scripts/generate_names.py --n 100 --seed 7 --out synthetic/names.csv
-```
-
-The first command prints CSV to stdout. Add `--sex Male` or `--sex Female` to select a given-name pool. Repeating a seed with the pinned Faker version gives the same names. Adding names does not change financial values or simulation results.
-
 ## Limitations
 
 - Financial items are sampled separately. Their sum need not reconcile with taxable income, total deductions or net tax. These records are useful for experiments and demonstrations, rather than tax calculations.
@@ -129,10 +77,10 @@ The first command prints CSV to stdout. Add `--sex Male` or `--sex Female` to se
 python3 -m unittest discover -s tests -v
 ```
 
-The tests check signed rental losses, seeded name generation, stable names for longitudinal agents, company release selection, preserved source blanks, CSV roundtrips and changed-file detection. The [verification notes](docs/verification.md) include current sample comparisons and company-source reconciliation.
+The tests check signed rental losses. The [verification notes](docs/verification.md) include current sample comparisons.
 
 ## Sources and reuse
 
-[SOURCES.md](SOURCES.md) lists the official publications, attribution and source licences. `data/processed/` contains reshaped public aggregates; `data/companies/` contains published corporate disclosures. Raw downloads, downloaded web archives and local environments are excluded. The older extraction scripts require separately downloaded files in `data/raw/`; the company refresh command downloads its own source.
+[SOURCES.md](SOURCES.md) lists the official publications, attribution and source licences. `data/processed/` contains reshaped public aggregates. Raw downloads, downloaded web archives and local environments are excluded. The older extraction scripts require separately downloaded files in `data/raw/`.
 
 The [MIT licence](LICENSE) covers the project's code and documentation. Source data retains its original licences. Project-created synthetic outputs are offered under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); retain the source attribution when redistributing them.

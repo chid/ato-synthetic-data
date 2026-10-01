@@ -31,11 +31,27 @@ The current-year file contains 4,299 records. It matches source sums of $3,342,1
 
 Four company-data tests cover latest-release selection, separating income years, literal source values, blank amounts, missing ABNs, CSV roundtrips, unexpected headers and changed-file detection. All nineteen repository tests pass. The offline validator checks the exported files against the manifest and summary. With `--workbook`, it also compares all source records. These are exact disclosure-data checks, distinct from the synthetic distribution comparisons below.
 
+### Named public company data and CbC sources moved
+
+Moved on review to a separate repo, `ato-company-tax-data`: real, named corporate
+disclosures and the CbC download tooling answer a different question from the
+synthetic individual population and made it easy to confuse real rows with simulated
+ones when both lived in one repo. `scripts/build_company_data.py`,
+`build_company_history.py`, `download_public_cbc.py`, `data/companies/`, `data/cbc/`,
+`docs/company-data.md`, and their five tests (the four company-data tests above plus
+the company-history/CbC-discovery tests) moved with it; none of it runs here anymore.
+Nothing in the synthetic individual model depended on it, so this is a removal of
+unrelated content, not a reduction in the individual model's fidelity.
+
 ### Fictional display names
 
 All population datasets now include `first_name`, `last_name` and `full_name`, generated with Faker 40.40.0 in the `en_AU` locale. The standalone `scripts/generate_names.py` command produces a seeded CSV. Names use an independent random generator. The longitudinal panel assigns one name per unique `agent_id`, so new entrants receive their own generated names and returning agents keep theirs.
 
 Seven name tests cover the exact seeded CLI output, repeatability, independent global random state, SeedSequence support, preservation of existing records, agent identity and invalid counts. Those checks and the three signed-item tests continue to pass. All four population outputs were regenerated with the existing model seeds. Comparisons against the previous committed datasets verify that every pre-existing column and all annual summaries are unchanged.
+
+### Fictional names removed
+
+Removed on review: Faker's `en_AU` locale does not model Australian name-frequency distributions by age or ancestry, and the names were added to every population output unconditionally rather than as an opt-in. `scripts/generate_names.py`, `tests/test_names.py` and the `Faker` dependency are removed; the `first_name`, `last_name` and `full_name` columns no longer appear in any output. The seven name tests above no longer run. All four population outputs were regenerated without those columns; every other column and all annual summaries are unchanged from the signed-loss-corrected versions.
 
 ### Signed loss correction
 
