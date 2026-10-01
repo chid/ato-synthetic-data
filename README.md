@@ -1,10 +1,12 @@
-# ATO synthetic tax data
+# ATO synthetic and public tax data
 
 Synthetic Australian individual tax records generated from published ATO, ABS and Census aggregate statistics. The main sample has 20,000 rows and 37 columns, calibrated to the 2022-23 income year.
 
-Every individual record is simulated. The project uses public aggregate tables, without taxpayer unit records, real taxpayer names, tax file numbers, contact details or private account data. Display names are fictional. Postcodes are geographic categories, and longitudinal `agent_id` values identify simulated people. This is an independent project, without government endorsement.
+The repository also includes [4,299 real named companies](data/companies/companies_2024_25.csv) from ATO's latest public corporate tax-transparency release, for 2024-25. These records retain the published names and financial figures and are stored separately from the synthetic people.
 
-## Download the data
+Every individual record is simulated from public aggregate tables. The individual model uses no real-person taxpayer records, names, tax file numbers, contact details or private account data. Its display names are fictional. Postcodes are geographic categories, and longitudinal `agent_id` values identify simulated people. This is an independent project, without government endorsement.
+
+## Download the synthetic data
 
 | File | Rows | Description |
 | --- | ---: | --- |
@@ -24,6 +26,28 @@ panel = pd.read_csv("synthetic/longitudinal_panel.csv.gz", dtype={"postcode": "s
 ```
 
 Amounts are annual Australian dollars except `help_debt_balance`, which is a debt balance. See the [data dictionary](docs/data-dictionary.md) for the columns.
+
+## Public company data
+
+The [ATO 2024-25 corporate tax-transparency workbook](https://data.gov.au/data/dataset/corporate-transparency) was released on 1 October 2026. Its income-tax records cover corporate entities meeting ATO's disclosure threshold of $100 million total income. This is a large-company disclosure dataset, not a census of Australian companies.
+
+| File | Rows | Description |
+| --- | ---: | --- |
+| [companies_2024_25.csv](data/companies/companies_2024_25.csv) | 4,299 | Real company names, published ABNs, total income, taxable income and tax payable |
+| [late_returns_2024_25.csv](data/companies/late_returns_2024_25.csv) | 116 | Late 2022-23 and 2023-24 returns included in the same release |
+| [prrt_2024_25.csv](data/companies/prrt_2024_25.csv) | 21 | Separately published petroleum resource rent tax records |
+| [summary_2024_25.csv](data/companies/summary_2024_25.csv) | 3 | Income-tax counts, published dollar sums and blank counts by income year |
+
+Amounts are annual AUD. ATO leaves amounts of zero or less blank, and the CSVs preserve those blanks. ABNs are text identifiers and remain blank where unpublished. The current-year published tax-payable amounts sum to $87,488,527,889. Late returns and PRRT are excluded from that sum.
+
+Refresh from the latest release, or validate the included CSVs offline:
+
+```sh
+python3 scripts/build_company_data.py
+python3 scripts/build_company_data.py --validate-only
+```
+
+The refresh downloads the official workbook into the ignored `data/raw/` directory, exports each source section and verifies every row against it. Use `--year 2024-25` to select that release explicitly. The [company data guide](docs/company-data.md) explains the fields, scope and offline reproduction. [Source metadata](data/companies/source_2024_25.json) records the source URL, licence, workbook checksum and export controls.
 
 ## Run the generator
 
@@ -84,10 +108,10 @@ The first command prints CSV to stdout. Add `--sex Male` or `--sex Female` to se
 python3 -m unittest discover -s tests -v
 ```
 
-The tests check signed rental losses, seeded name generation, CSV output and stable names for longitudinal agents. The [verification notes](docs/verification.md) include current sample comparisons.
+The tests check signed rental losses, seeded name generation, stable names for longitudinal agents, company release selection, preserved source blanks, CSV roundtrips and changed-file detection. The [verification notes](docs/verification.md) include current sample comparisons and company-source reconciliation.
 
 ## Sources and reuse
 
-[SOURCES.md](SOURCES.md) lists the official publications, attribution and source licences. Processed CSVs are reshaped public aggregate tables. Raw downloads, downloaded web archives and local environments are excluded. Extraction scripts remain available, but require separately downloaded files in `data/raw/`.
+[SOURCES.md](SOURCES.md) lists the official publications, attribution and source licences. `data/processed/` contains reshaped public aggregates; `data/companies/` contains published corporate disclosures. Raw downloads, downloaded web archives and local environments are excluded. The older extraction scripts require separately downloaded files in `data/raw/`; the company refresh command downloads its own source.
 
 The [MIT licence](LICENSE) covers the project's code and documentation. Source data retains its original licences. Project-created synthetic outputs are offered under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); retain the source attribution when redistributing them.

@@ -17,11 +17,19 @@ The backtest validators compare predicted median income with the current synthet
 
 ## Public-copy changes
 
+### Named public company data
+
+The latest corporate tax-transparency release was discovered through the official data.gov.au metadata API on 1 October 2026. The downloaded 2024-25 workbook's SHA-256 is recorded in `data/companies/source_2024_25.json`. Every name, published ABN, integer amount, blank and income-year label was compared with the original worksheet rows after CSV export.
+
+The current-year file contains 4,299 records. It matches source sums of $3,342,185,114,932 total income, $349,136,493,123 taxable income and $87,488,527,889 tax payable. All 961 blank taxable-income values, 1,149 blank tax-payable values and 31 blank ABNs are preserved. Separate files retain all 116 late returns and all 21 PRRT records. The PRRT amount sum is $1,872,820,121.
+
+Four company-data tests cover latest-release selection, separating income years, literal source values, blank amounts, missing ABNs, CSV roundtrips, unexpected headers and changed-file detection. All fourteen repository tests pass. The offline validator checks the exported files against the manifest and summary. With `--workbook`, it also compares all source records. These are exact disclosure-data checks, distinct from the synthetic distribution comparisons below.
+
 ### Fictional display names
 
 All population datasets now include `first_name`, `last_name` and `full_name`, generated with Faker 40.40.0 in the `en_AU` locale. The standalone `scripts/generate_names.py` command produces a seeded CSV. Names use an independent random generator. The longitudinal panel assigns one name per unique `agent_id`, so new entrants receive their own generated names and returning agents keep theirs.
 
-Seven name tests cover the exact seeded CLI output, repeatability, independent global random state, SeedSequence support, preservation of existing records, agent identity and invalid counts. Together with the three signed-item tests, ten tests pass. All four population outputs were regenerated with the existing model seeds. Comparisons against the previous committed datasets verify that every pre-existing column and all annual summaries are unchanged.
+Seven name tests cover the exact seeded CLI output, repeatability, independent global random state, SeedSequence support, preservation of existing records, agent identity and invalid counts. Those checks and the three signed-item tests continue to pass. All four population outputs were regenerated with the existing model seeds. Comparisons against the previous committed datasets verify that every pre-existing column and all annual summaries are unchanged.
 
 ### Signed loss correction
 
@@ -38,7 +46,7 @@ Three regression tests pass. Before the fix, two failed with "Rental losses were
 
 The validator counts negative amounts as present and compares taxable-income means using the same all-lodger denominator. Preserving signed losses fixes the discarded-loss bug. Aggregate sample differences and independent financial draws remain.
 
-The publishing copy has a fresh Git history. It excludes the original virtual environment, Python caches, filesystem metadata, raw source downloads and downloaded web archives. The included input tables are published aggregates.
+The publishing copy has a fresh Git history. It excludes the original virtual environment, Python caches, filesystem metadata, raw source downloads and downloaded web archives. The included individual-model input tables are published aggregates. The separately labelled company files contain real corporate disclosures from ATO's public workbook.
 
 The public copy adds two small processed inputs so generation and validation run without source downloads: Census G01 national population counts by sex and ABS quarterly national population totals. The relevant readers use these CSVs. The longitudinal validator can also read the compressed panel.
 

@@ -1,6 +1,6 @@
 # Sources and attribution
 
-Source links and licence information checked on 1 October 2026. This repository contains reshaped aggregate tables and simulated outputs. The MIT code licence does not replace source-data licences.
+Source links and licence information checked on 1 October 2026. This repository contains reshaped aggregate tables, published corporate disclosures and simulated outputs. The MIT code licence does not replace source-data licences.
 
 ## Australian Taxation Office
 
@@ -11,8 +11,13 @@ Based on Australian Taxation Office Taxation Statistics data, Commonwealth of Au
 | [Taxation Statistics 2022-23](https://data.gov.au/data/dataset/taxation-statistics-2022-23) | Individuals Tables 1, 3A, 5, 6A, 16A, 16B, 18 and 19 | [CC BY 2.5 Australia](https://creativecommons.org/licenses/by/2.5/au/) |
 | [Taxation Statistics 2012-13](https://data.gov.au/data/dataset/taxation-statistics-2012-13) | Individuals Tables 3 and 14 | [CC BY 3.0 Australia](https://creativecommons.org/licenses/by/3.0/au/) |
 | [Taxation Statistics 2009-10](https://data.gov.au/data/dataset/taxation-statistics-2009-10) | Personal tax Table PER11 | [CC BY 3.0 Australia](https://creativecommons.org/licenses/by/3.0/au/) |
+| [Corporate tax transparency 2024-25](https://data.gov.au/data/dataset/corporate-transparency) | Income tax details and PRRT details, including late returns in the release | [CC BY 3.0 Australia](https://creativecommons.org/licenses/by/3.0/au/) |
 
 The dataset metadata and licence identifiers are also available through the [data.gov.au package API](https://data.gov.au/data/api/3/action/package_show?id=taxation-statistics-2022-23), substituting the dataset slug for each vintage.
+
+The company disclosures in `data/companies/` are based on the Australian Taxation Office's [2024-25 Report of Entity Tax Information](https://data.gov.au/data/dataset/c2524c87-cea4-4636-acac-599a82048a26/resource/15bf4eaa-7a14-48e9-8a3f-092df32a644e/download/2024-25-corporate-report-of-entity-tax-information.xlsx), Commonwealth of Australia. Changes are limited to CSV conversion, descriptive column names, separating income years and adding the release year to PRRT rows. Names, published ABNs and amounts are retained. The summary reports counts and sums of published amounts; blank amounts are not filled with zero. These files retain the source's CC BY 3.0 Australia licence. Credit the ATO and identify this project as the modified CSV extract.
+
+The [corporate-transparency metadata API](https://data.gov.au/data/api/3/action/package_show?id=corporate-transparency) identified 2024-25 as the latest release when checked on 1 October 2026. The workbook sets a 1 August 2026 cut-off date and includes 116 late income-tax records from earlier years. Company disclosures describe tax entities, which may differ from economic or accounting groups. See the [company data guide](docs/company-data.md).
 
 ## Australian Bureau of Statistics
 
